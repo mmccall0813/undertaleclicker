@@ -172,8 +172,6 @@ function update(){
 	$("#comparison").html(length_comp);
 	$("#total_volume").html(repr_volume(soul_volume * Math.floor(souls)));
 	$("#volume_comparison").html(compare_volume(soul_volume * Math.floor(souls)));
-	$("#total_weight").html(repr_weight(soul_weight * Math.floor(souls)));
-	$("#weight_comparison").html(compare_weight(soul_weight * Math.floor(souls)));
 	setTimeout(update, 20);	
 }
 function change_character2(x) {
