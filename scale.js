@@ -1,5 +1,4 @@
 var soul_volume = 0.01601725;  //Volume in m^3
-var soul_weight = 2.837961; //Weight in kg
 var soul_length = 0.2875;  //Length in metres
 var soul_area = 0.07065; //Area in m^2
 function show_info(){

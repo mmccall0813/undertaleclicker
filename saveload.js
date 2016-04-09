@@ -178,7 +178,7 @@ function import_save(){
 		soul.level = d01_level;
 	var d02_exp = parseInt(data[1]);
 	if(isNaN(d02_exp)) d02_exp = 0;
-		souly.exp = d02_exp;
+		soul.exp = d02_exp;
 	var d03_souls = parseFloat(data[2]);
 	if(isNaN(d03_souls)) d03_souls = 0;
 		souls = d03_souls;
