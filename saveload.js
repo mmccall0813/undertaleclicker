@@ -51,7 +51,9 @@ function reset_game(){
 }
 function query_reset(){
 	if(confirm("Really reset your game?")){
-		reset_game();
+		if (confirm("Do you want all your tryharding be go to waste? (not a typo)")) {
+			reset_game();
+		}
 	}
 }
 // Text import/export
