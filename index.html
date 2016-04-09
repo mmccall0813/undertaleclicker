@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html id="html">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Undertale Clicker</title>
+<link rel="stylesheet" href="undertaleclicker.css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="sprintf.min.js"></script>
+<script type="text/javascript" src="about.js"></script>
+<script type="text/javascript" src="items.js"></script>
+<script type="text/javascript" src="recalc.js"></script>
+<script type="text/javascript" src="undertaleclicker.js"></script>
+<script type="text/javascript" src="saveload.js"></script>
+<script type="text/javascript" src="scale/weight.js"></script>
+<script type="text/javascript" src="scale/length.js"></script>
+<script type="text/javascript" src="scale/volume.js"></script>
+<script type="text/javascript" src="scale.js"></script>
+</head>
+<body onload="init_game()" id="body">
+<div id="container" style="position:absolute;z-index:-1;left:0;top:0;width:100%;height:100%">
+	<img id="background" src="images/bg.jpg"/>
+<div id="gamebox">
+	<table style="width: 100%;">
+		<tr>
+			<td id="leftbar_c">
+				<div id="leftbar">
+					<p>
+						<button id="save_button">Save</button>
+						<button id="export_button">Export Save</button>
+						<button id="import_button">Import Save</button>
+
+						<div id="save_dialog">
+							Game saved.
+						</div>
+						<div id="export_dialog">
+							<span class="small">Export this save file:</span>
+							<textarea id="export_string" style="resize: none;"></textarea>
+							<button id="close_export">Done</button>
+						</div>
+						<div id="import_dialog">
+							<span class="small">Import this save file:</span>
+							<textarea id="import_string" style="resize: none;"></textarea>
+							<button id="import_savefile">Import</button>
+						</div>
+					</p>
+					<p>
+						<button id="info_button" onclick="show_info()">Show Info</button>
+                        <button id="info_button" onclick="change_character()">Change Character</button>
+                        <button id="info_button" onclick="change_bg()">Change Background</button>
+                        <button id="info_button" onclick="show_credits()">Show Credits</button>
+						<button id="info_button" onclick="query_reset()">Reset</button>
+					</p>
+				</div>
+				<div id="upgrade_bar">
+				</div>
+			</td>
+			<td id="centre_c" rowspan="2">
+				<div id="centre" style="text-align: center; position: relative;">			
+					<div id="souls">
+						<p><span id="soulcount">0 SOULs</span><br />
+						<span id="sps">0 SOULs per second</span></p>
+					</div>
+					<div id="soul_container" style="margin: auto;">
+						<img id="great_character" style="margin: auto; height: 400px;" src="images/great_flowey.png"/>
+					</div>
+					<div id="stats">
+						<span class="dialog_header">STATS</span>
+						<div>Level <span id="level">1</span> <progress id="expbar" max="100" value="0"></progress></div>
+						<p>If your swath of SOULs were laid out end to end, they would stretch <span id="comparison" class="indicator"></span>.</p>
+					</div>
+					<!--Begin Panels-->
+					<div id="info" class="panel">
+						<span class="dialog_header">INFORMATION</span>
+						<p>Number of SOULs: <span id="info_soulcount" class="indicator"></span></p>
+
+						<p>Total length your SOULs line up to: <b><span id="total_length"></span></b><br />
+						If your swath of SOULs were laid out end to end, they would stretch <span id="length_comparison" class="indicator"></span>.</p>
+
+						<p>Total space your SOULs fill: <b><span id="total_volume"></span></b><br />
+						Your swath of SOULs could <span id="volume_comparison" class="indicator"></span>.</p>
+
+						<p>Total mass of your SOULs: <b><span id="total_weight"></span></b><br />
+						Your swath of SOULs weighs as much as <span id="weight_comparison" class="indicator"></span>.</p>
+						<button onclick="hide_info()">Close</button>
+					</div>
+					<div id="characters" class="panel">
+                    	<table id="charactertable">
+                        	<tr>
+                            	<td><div><button onclick="change_character2(0)">Alphys</button></div></td>
+                                <td><div><button onclick="change_character2(1)">Annoying Dog</button></div></td>
+                                <td><div><button onclick="change_character2(2)">Asgore</button></div></td>
+                                <td><div><button onclick="change_character2(3)">Asriel</button></div></td>
+                                <td><div><button onclick="change_character2(4)">Burgerpants</button></div></td>
+                                <td><div><button onclick="change_character2(5)">Chara</button></div></td>
+                                <td><div><button onclick="change_character2(6)">Flowey</button></div></td>
+                            </tr>
+                            <tr>
+                            	<td><div><button onclick="change_character2(7)">Frisk</button></div></td>
+                                <td><div><button onclick="change_character2(8)">Froggit</button></div></td>
+                                <td><div><button onclick="change_character2(9)">Mettaton EX</button></div></td>
+                                <td><div><button onclick="change_character2(10)">Monster Kid</button></div></td>
+                                <td><div><button onclick="change_character2(11)">Muffet</button></div></td>
+                                <td><div><button onclick="change_character2(12)">Napstablook</button></div></td>
+                                <td><div><button onclick="change_character2(13)">Nice Cream Guy</button></div></td>
+                            </tr>
+                            <tr>
+                            	<td><div><button onclick="change_character2(14)">Papyrus</button></div></td>
+                                <td><div><button onclick="change_character2(15)">Sans</button></div></td>
+                                <td><div><button onclick="change_character2(16)">So Sorry</button></div></td>
+                                <td><div><button onclick="change_character2(17)">Temmie</button></div></td>
+                                <td><div><button onclick="change_character2(18)">Toriel</button></div></td>
+                                <td><div><button onclick="change_character2(19)">Undyne</button></div></td>
+                                <td><div><button onclick="change_character2(20)">W. D. Gaster</button></div></td>
+                            </tr>
+                        </table>
+                        <button onclick="hide_characters()">Close</button>
+                    </div>
+                    <div id="bgs" class="panel">
+                    	<table id="bgtable">
+                        	<tr>
+                            	<td><div><button onclick="change_bg2(0)">Default Background</button></div></td>
+                                <td><div><button onclick="change_bg2(1)">Red Background</button></div></td>
+                            </tr>
+                            <tr>
+                            	<td><div><button onclick="change_bg2(2)">Orange Background</button></div></td>
+                                <td><div><button onclick="change_bg2(3)">Purple Background</button></div></td>
+                            </tr>
+                        </table>
+                        <button onclick="hide_bgs()">Close</button>
+                    </div>
+					<!--End Panels-->
+				</div>
+			</td>
+			<td id="rightbar_c" rowspan="2">
+				<div id="rightbar">
+				</div>
+			</td>
+		</tr>
+	</table>
+</div>
+<!--Gamebox-->
+<div id="msgbox">
+	<div id="credits">
+		<p>Undertale Clicker <span class="version">v0.1 Beta</span></p>
+		<p>&copy; 2016 <a href="http://blockworld.github.io/">BlockWorld</a>.</p>
+		<p><a href="http://orteil.dashnet.org/cookieclicker/">Cookie Clicker</a> &copy; 2013 Orteil.<br/>Undertale &copy; tobyfox.<br/>Original &copy; <a href="http://joezeng.com/">Joe Zeng</a>.<br/>The pictures, except for those by tobyfox, are from various sources including Tumblr and the Undertale Wiki.</p>
+	</div>
+	<button onclick="close_msgbox()">Close</button>
+</div>
+</div>
+</body>
+</html>
