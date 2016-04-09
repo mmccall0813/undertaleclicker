@@ -157,7 +157,7 @@ upgrades = [
 	},
 	{
 		"name": "Cowboy Hat",
-		"description": "Makes Humanss <b>four times</b> as efficient.",
+		"description": "Makes Humans <b>four times</b> as efficient.",
 		"ftext": "This battle-worn hat makes you want to grow a beard.",
 		"upgrades": ["human"],
 		"cost": 4000000000000,
